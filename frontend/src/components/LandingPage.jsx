@@ -144,24 +144,22 @@ export default function LandingPage() {
       </nav>
 
       {/* MOBILE MENU DRAWER */}
-      {isMobileMenuOpen && (
-        <div className="mobile-menu-overlay" onClick={() => setIsMobileMenuOpen(false)}>
-          <div className="mobile-menu-drawer" onClick={e => e.stopPropagation()}>
-            <button className="mobile-menu-close" onClick={() => setIsMobileMenuOpen(false)}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-            <div className="mobile-menu-links">
-              <a href="#process" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Process</a>
-              <a href="#work" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Our Work</a>
-              <a href="#testimonials" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Clients</a>
-              <a href="#faq" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>
-              <a href={hero.cta_primary.href} className="btn-primary" onClick={() => setIsMobileMenuOpen(false)}>Book a call</a>
-            </div>
+      <div className={`mobile-menu-overlay ${isMobileMenuOpen ? 'open' : ''}`} onClick={() => setIsMobileMenuOpen(false)}>
+        <div className="mobile-menu-drawer" onClick={e => e.stopPropagation()}>
+          <button className="mobile-menu-close" onClick={() => setIsMobileMenuOpen(false)}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <div className="mobile-menu-links">
+            <a href="#process" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Process</a>
+            <a href="#work" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Our Work</a>
+            <a href="#testimonials" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Clients</a>
+            <a href="#faq" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>
+            <a href={hero.cta_primary.href} className="btn-primary" onClick={() => setIsMobileMenuOpen(false)}>Book a call</a>
           </div>
         </div>
-      )}
+      </div>
 
       {/* ══ HERO ══ */}
       <header className="hero" id="home">
