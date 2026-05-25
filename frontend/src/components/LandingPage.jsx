@@ -181,7 +181,7 @@ export default function LandingPage() {
           <span className="hero-eyebrow">{brand.emoji ? `${brand.emoji} ` : ''}{hero.eyebrow}</span>
           <h1 className="hero-title">
             A team of experts<br />
-            for every <ContainerTextFlip words={["creator.", "influencer."]} />
+            <span style={{ whiteSpace: "nowrap" }}>for every <ContainerTextFlip words={["creator.", "influencer."]} /></span>
           </h1>
           <p className="hero-sub">{hero.subtitle}</p>
           <div className="hero-ctas">
