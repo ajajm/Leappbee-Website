@@ -144,24 +144,22 @@ export default function LandingPage() {
       </nav>
 
       {/* MOBILE MENU DRAWER */}
-      {isMobileMenuOpen && (
-        <div className="mobile-menu-overlay" onClick={() => setIsMobileMenuOpen(false)}>
-          <div className="mobile-menu-drawer" onClick={e => e.stopPropagation()}>
-            <button className="mobile-menu-close" onClick={() => setIsMobileMenuOpen(false)}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-            <div className="mobile-menu-links">
-              <a href="#process" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Process</a>
-              <a href="#work" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Our Work</a>
-              <a href="#testimonials" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Clients</a>
-              <a href="#faq" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>
-              <a href={hero.cta_primary.href} className="btn-primary" onClick={() => setIsMobileMenuOpen(false)}>Book a call</a>
-            </div>
+      <div className={`mobile-menu-overlay ${isMobileMenuOpen ? 'open' : ''}`} onClick={() => setIsMobileMenuOpen(false)}>
+        <div className={`mobile-menu-drawer ${isMobileMenuOpen ? 'open' : ''}`} onClick={e => e.stopPropagation()}>
+          <button className="mobile-menu-close" onClick={() => setIsMobileMenuOpen(false)}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <div className="mobile-menu-links">
+            <a href="#process" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Process</a>
+            <a href="#work" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Our Work</a>
+            <a href="#testimonials" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Clients</a>
+            <a href="#faq" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>
+            <a href={hero.cta_primary.href} className="btn-primary" onClick={() => setIsMobileMenuOpen(false)}>Book a call</a>
           </div>
         </div>
-      )}
+      </div>
 
       {/* ══ HERO ══ */}
       <header className="hero" id="home">
@@ -177,11 +175,12 @@ export default function LandingPage() {
           }} />
         </div>
         <div className="hero-body">
-          <span className="hero-eyebrow">{brand.emoji} {hero.eyebrow}</span>
+          <span className="hero-eyebrow">{brand.emoji ? `${brand.emoji} ` : ''}{hero.eyebrow}</span>
           <h1 className="hero-title">
-            {hero.title.split('\n').map((line, i) => (
-              <React.Fragment key={i}>{line}{i < hero.title.split('\n').length - 1 && <br />}</React.Fragment>
+            {hero.title.replace('creator.', '').split('\n').map((line, i, arr) => (
+              <React.Fragment key={i}>{line}{i < arr.length - 1 && <br />}</React.Fragment>
             ))}
+            <FlipWords words={["creator.", "influencer.", "brand."]} />
           </h1>
           <p className="hero-sub">{hero.subtitle}</p>
           <div className="hero-ctas">
@@ -487,6 +486,43 @@ function AnimatedNumber({ value }) {
 
   if (!target) return <span ref={ref}>{value}</span>;
   return <span ref={ref}>{count}{suffix}</span>;
+}
+
+function FlipWords({ words }) {
+  const [index, setIndex] = useState(0);
+  const [prevIndex, setPrevIndex] = useState(-1);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPrevIndex(index);
+      setIndex((prev) => (prev + 1) % words.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [index, words.length]);
+
+  return (
+    <span style={{ position: 'relative', display: 'inline-block' }}>
+      <span style={{ opacity: 0, pointerEvents: 'none', visibility: 'hidden' }}>
+        {words.reduce((a, b) => a.length > b.length ? a : b)}
+      </span>
+      {words.map((word, i) => {
+        const isActive = i === index;
+        const isPrev = i === prevIndex;
+        if (!isActive && !isPrev && prevIndex !== -1) return null;
+        
+        let className = 'flip-word';
+        if (isActive && prevIndex !== -1) className += ' flip-word-in';
+        if (isPrev) className += ' flip-word-out';
+        if (isActive && prevIndex === -1) className += ' flip-word-static';
+
+        return (
+          <span key={word} className={className} style={{ position: 'absolute', left: 0, top: 0 }}>
+            {word}
+          </span>
+        );
+      })}
+    </span>
+  );
 }
 
 function VCard({ v, short = false }) {
