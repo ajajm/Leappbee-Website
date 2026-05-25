@@ -909,8 +909,28 @@ section {
   .process-step { text-align: left; border-right: none; border-bottom: 1px solid var(--border); }
   .process-step:last-child { border-bottom: none; }
   
-  .grid-long  { grid-template-columns: 1fr; }
-  .grid-short { grid-template-columns: repeat(2,1fr); }
+  .grid-long, .grid-short, .testimonials-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding-bottom: 24px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .grid-long::-webkit-scrollbar, .grid-short::-webkit-scrollbar, .testimonials-grid::-webkit-scrollbar {
+    display: none;
+  }
+  .grid-long > *, .testimonials-grid > * {
+    flex: 0 0 85%;
+    scroll-snap-align: start;
+  }
+  .grid-short > * {
+    flex: 0 0 50%;
+    scroll-snap-align: start;
+  }
   
   .stats-row {
     display: grid;

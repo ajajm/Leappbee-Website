@@ -173,7 +173,7 @@ export default function LandingPage() {
           <div className="hero-orb hero-orb-2" />
           <div style={{
             position: 'absolute', bottom: 0, left: 0, right: 0, height: '60%',
-            background: 'linear-gradient(to top, #141312 12%, transparent)', pointerEvents: 'none'
+            background: 'linear-gradient(to top, #141312 12%, transparent)', pointerEvents: 'none', zIndex: 5
           }} />
         </div>
         <div className="hero-body">
@@ -466,10 +466,6 @@ function VCard({ v, short = false }) {
           allowFullScreen
           style={{ width: '100%', height: '100%', border: 'none', position: 'absolute', top: 0, left: 0 }}
         />
-        <span className="vcard-tag" style={{ pointerEvents: 'none', zIndex: 10 }}>{v.category}</span>
-        <span className="vcard-badge" style={{ pointerEvents: 'none', zIndex: 10 }}>
-          {isYouTube ? '▶ YouTube' : isInstagram ? '📷 Instagram' : isDrive ? '📁 Drive' : 'Video'}
-        </span>
       </div>
     </div>
   );
