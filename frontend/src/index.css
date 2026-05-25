@@ -290,7 +290,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .hero-title {
   font-family: 'Inter Tight', sans-serif;
-  font-size: clamp(28px, 9.5vw, 84px);
+  font-size: clamp(24px, 8.5vw, 84px);
   font-weight: 700;
   line-height: 1.05;
   margin-bottom: 20px;
@@ -300,6 +300,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+.hero-title * {
+  background: linear-gradient(to bottom right, var(--cream) 20%, #c8bba6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 .hero-sub {
   font-size: clamp(16px, 2vw, 20px); line-height: 1.6;

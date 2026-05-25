@@ -498,19 +498,6 @@ function ContainerTextFlip({
 }) {
   const id = useId();
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [width, setWidth] = useState("auto");
-  const textRef = useRef(null);
-
-  const updateWidthForWord = () => {
-    if (textRef.current) {
-      const textWidth = textRef.current.scrollWidth;
-      setWidth(textWidth);
-    }
-  };
-
-  useEffect(() => {
-    updateWidthForWord();
-  }, [currentWordIndex]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -524,12 +511,9 @@ function ContainerTextFlip({
     <motion.span
       layout
       layoutId={`words-here-${id}`}
-      animate={{ width }}
-      transition={{ duration: animationDuration / 2000 }}
       style={{
         display: "inline-block",
         position: "relative",
-        verticalAlign: "bottom"
       }}
       className={className}
       key={words[currentWordIndex]}
@@ -541,17 +525,15 @@ function ContainerTextFlip({
         }}
         className={textClassName}
         style={{ display: "inline-block", whiteSpace: "nowrap" }}
-        ref={textRef}
         layoutId={`word-div-${words[currentWordIndex]}-${id}`}
       >
-        <motion.span style={{ display: "inline-block" }}>
+        <motion.span>
           {words[currentWordIndex].split("").map((letter, index) => (
             <motion.span
               key={index}
               initial={{ opacity: 0, filter: "blur(10px)" }}
               animate={{ opacity: 1, filter: "blur(0px)" }}
               transition={{ delay: index * 0.02 }}
-              style={{ display: "inline-block" }}
             >
               {letter}
             </motion.span>
