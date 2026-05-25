@@ -52,11 +52,27 @@ export const parseVideoUrl = (url) => {
     };
   }
 
+  // 4. Instagram Video Parser (Reels/Posts)
+  const instaRegex = /(?:https?:\/\/)?(?:www\.)?instagram\.com\/(reel|p)\/([a-zA-Z0-9_-]+)/;
+  const instaMatch = url.match(instaRegex);
+  if (instaMatch && instaMatch[2]) {
+    const type = instaMatch[1]; // 'reel' or 'p'
+    const id = instaMatch[2];
+    return {
+      embedUrl: `https://www.instagram.com/${type}/${id}/embed`,
+      thumbnail: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=800&auto=format&fit=crop', // Instagram themed stock image
+      isYouTube: false,
+      isDrive: false,
+      isInstagram: true
+    };
+  }
+
   // Fallback
   return {
     embedUrl: url,
     thumbnail: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop',
     isYouTube: false,
-    isDrive: false
+    isDrive: false,
+    isInstagram: false
   };
 };
