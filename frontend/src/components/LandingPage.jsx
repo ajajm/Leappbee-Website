@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { parseVideoUrl } from '../utils/videoParser';
 import data from '../data.json';
 
@@ -287,7 +287,7 @@ export default function LandingPage() {
             <div className="stats-row">
               {stats.items.map(s => (
                 <div key={s.number}>
-                  <span className="stat-num">{s.number}</span>
+                  <span className="stat-num"><AnimatedNumber value={s.number} /></span>
                   <p className="stat-lbl">{s.label}</p>
                 </div>
               ))}
@@ -451,6 +451,44 @@ export default function LandingPage() {
 }
 
 /* ─── Sub-components ──────────────────────────────────────── */
+
+function AnimatedNumber({ value }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+
+  const numMatch = value.match(/\d+/);
+  const target = numMatch ? parseInt(numMatch[0], 10) : 0;
+  const suffix = value.replace(/\d+/g, '');
+
+  useEffect(() => {
+    let observer;
+    if (ref.current) {
+      observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          let start = 0;
+          const duration = 2000;
+          const increment = target / (duration / 16);
+          const timer = setInterval(() => {
+            start += increment;
+            if (start >= target) {
+              setCount(target);
+              clearInterval(timer);
+            } else {
+              setCount(Math.ceil(start));
+            }
+          }, 16);
+          observer.disconnect();
+        }
+      }, { threshold: 0.5 });
+      observer.observe(ref.current);
+    }
+    return () => observer && observer.disconnect();
+  }, [target]);
+
+  if (!target) return <span ref={ref}>{value}</span>;
+  return <span ref={ref}>{count}{suffix}</span>;
+}
+
 function VCard({ v, short = false }) {
   const { isYouTube, isDrive, isInstagram, embedUrl } = parseVideoUrl(v.url);
   const safeEmbedUrl = embedUrl.replace('autoplay=1', 'autoplay=0');
