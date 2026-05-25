@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef, useId, useCallback } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
 import { parseVideoUrl } from '../utils/videoParser';
 import data from '../data.json';
 
@@ -178,10 +177,11 @@ export default function LandingPage() {
           }} />
         </div>
         <div className="hero-body">
-          <span className="hero-eyebrow">{brand.emoji ? `${brand.emoji} ` : ''}{hero.eyebrow}</span>
+          <span className="hero-eyebrow">{brand.emoji} {hero.eyebrow}</span>
           <h1 className="hero-title">
-            A team of experts<br />
-            <span style={{ whiteSpace: "nowrap" }}>for every <ContainerTextFlip words={["creator.", "influencer."]} /></span>
+            {hero.title.split('\n').map((line, i) => (
+              <React.Fragment key={i}>{line}{i < hero.title.split('\n').length - 1 && <br />}</React.Fragment>
+            ))}
           </h1>
           <p className="hero-sub">{hero.subtitle}</p>
           <div className="hero-ctas">
@@ -487,61 +487,6 @@ function AnimatedNumber({ value }) {
 
   if (!target) return <span ref={ref}>{value}</span>;
   return <span ref={ref}>{count}{suffix}</span>;
-}
-
-function ContainerTextFlip({
-  words = ["creator.", "influencer."],
-  interval = 3000,
-  className = "",
-  textClassName = "",
-  animationDuration = 700,
-}) {
-  const id = useId();
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length);
-    }, interval);
-
-    return () => clearInterval(intervalId);
-  }, [words, interval]);
-
-  return (
-    <motion.span
-      layout
-      layoutId={`words-here-${id}`}
-      style={{
-        display: "inline-block",
-        position: "relative",
-      }}
-      className={className}
-      key={words[currentWordIndex]}
-    >
-      <motion.span
-        transition={{
-          duration: animationDuration / 1000,
-          ease: "easeInOut",
-        }}
-        className={textClassName}
-        style={{ display: "inline-block", whiteSpace: "nowrap" }}
-        layoutId={`word-div-${words[currentWordIndex]}-${id}`}
-      >
-        <motion.span>
-          {words[currentWordIndex].split("").map((letter, index) => (
-            <motion.span
-              key={index}
-              initial={{ opacity: 0, filter: "blur(10px)" }}
-              animate={{ opacity: 1, filter: "blur(0px)" }}
-              transition={{ delay: index * 0.02 }}
-            >
-              {letter}
-            </motion.span>
-          ))}
-        </motion.span>
-      </motion.span>
-    </motion.span>
-  );
 }
 
 function VCard({ v, short = false }) {
