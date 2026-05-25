@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-
-const API_BASE = 'http://localhost:5000/api';
+import { API_BASE } from '../utils/api';
 
 export default function AdminLogin({ onLoginSuccess, onBack }) {
   const [username, setUsername] = useState('');

@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { parseVideoUrl } from '../utils/videoParser';
 import CFG from '../siteConfig';
-
-const API_BASE = 'http://localhost:5000/api';
+import { API_BASE } from '../utils/api';
 
 /* ── Exact Paperclip gradient pill SVG (extracted from source) ── */
 const HeroBgSVG = () => (
@@ -63,7 +62,7 @@ const LeappbeeLogo = ({ size = 20 }) => (
 );
 
 export default function LandingPage({ onAdminClick }) {
-  const [videos, setVideos] = useState([]);
+  const [videos, setVideos] = useState(CFG.videos || []);
   const [longTab, setLongTab] = useState('All');
   const [shortTab, setShortTab] = useState('All');
   const [modal, setModal] = useState(null);
@@ -74,9 +73,13 @@ export default function LandingPage({ onAdminClick }) {
   useEffect(() => {
     fetch(`${API_BASE}/videos`)
       .then(r => r.ok ? r.json() : [])
-      .then(setVideos)
+      .then(data => {
+        if (data && data.length > 0) {
+          setVideos(data);
+        }
+      })
       .catch(() => { });
-      
+
     fetch(`${API_BASE}/config`)
       .then(r => r.ok ? r.json() : null)
       .then(setSiteConfig)

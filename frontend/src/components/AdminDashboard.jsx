@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { parseVideoUrl } from '../utils/videoParser';
-
-const API_BASE = 'http://localhost:5000/api';
+import { API_BASE } from '../utils/api';
 
 const LONG_CATS  = ['Vlogs', 'Explainers', 'Podcasts', 'Ads', 'Documentaries'];
 const SHORT_CATS = ['TikTok/Reels', 'Motion Graphics', 'Gaming Clips', 'Shorts'];

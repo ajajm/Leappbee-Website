@@ -221,6 +221,66 @@ const SITE_CONFIG = {
     ],
   },
 
+  /* ── Portfolio Videos ───────────────────────────────────── */
+  videos: [
+    {
+      _id: '1',
+      title: "Ultimate 24-Hour Cyber Truck Challenge",
+      type: "long-form",
+      category: "Vlogs",
+      url: "https://www.youtube.com/watch?v=9bZkp7q19f0",
+      order: 0
+    },
+    {
+      _id: '2',
+      title: "What if ShowSpeed Became The Flash?",
+      type: "long-form",
+      category: "Explainers",
+      url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      order: 1
+    },
+    {
+      _id: '3',
+      title: "How To Start Day Trading As A Beginner in 2026",
+      type: "long-form",
+      category: "Podcasts",
+      url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      order: 2
+    },
+    {
+      _id: '4',
+      title: "Leappbee Creative Studio Promo Video",
+      type: "long-form",
+      category: "Ads",
+      url: "https://drive.google.com/file/d/1_d2b1c4e7f8g9h0i1j2k3l4m5n6o7p8q/view",
+      order: 3
+    },
+    {
+      _id: '5',
+      title: "High Retention Talking Head Showcase",
+      type: "short-form",
+      category: "TikTok/Reels",
+      url: "https://youtube.com/shorts/dQw4w9WgXcQ",
+      order: 0
+    },
+    {
+      _id: '6',
+      title: "SaaS Motion Graphics Showcase",
+      type: "short-form",
+      category: "Motion Graphics",
+      url: "https://drive.google.com/file/d/1_d2b1c4e7f8g9h0i1j2k3l4m5n6o7p8q/view",
+      order: 1
+    },
+    {
+      _id: '7',
+      title: "Fast Paced Gaming Stream Highlight",
+      type: "short-form",
+      category: "Gaming Clips",
+      url: "https://youtube.com/shorts/dQw4w9WgXcQ",
+      order: 2
+    }
+  ],
+
   /* ── Admin credentials reminder ─────────────────────────── */
   // IMPORTANT: Set these in backend/.env — NOT here
   // ADMIN_USERNAME=admin

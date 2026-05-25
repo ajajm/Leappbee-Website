@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import LandingPage from './components/LandingPage';
 import AdminLogin from './components/AdminLogin';
 import AdminDashboard from './components/AdminDashboard';
-
-const API_BASE = 'http://localhost:5000/api';
+import { API_BASE } from './utils/api';
 
 function App() {
   const [view, setView] = useState(() => {
