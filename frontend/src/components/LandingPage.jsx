@@ -2,57 +2,52 @@ import React, { useState, useEffect, useRef } from 'react';
 import { parseVideoUrl } from '../utils/videoParser';
 import data from '../data.json';
 
-/* ── Exact Paperclip gradient pill SVG (extracted from source) ── */
-const HeroBgSVG = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" aria-hidden="true" preserveAspectRatio="xMidYMid slice"
-    style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '100%', height: '100%' }}>
-    <defs>
-      <linearGradient id="g0" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(90 0.5 0.5)"><stop offset="0%" stopColor="#3c23fb" /><stop offset="100%" stopColor="#fb8b24" /></linearGradient>
-      <linearGradient id="g1" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(90 0.5 0.5)"><stop offset="0%" stopColor="#6721fa" /><stop offset="100%" stopColor="#f85f1c" /></linearGradient>
-      <linearGradient id="g2" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(90 0.5 0.5)"><stop offset="0%" stopColor="#921ff8" /><stop offset="100%" stopColor="#f53215" /></linearGradient>
-      <linearGradient id="g3" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(90 0.5 0.5)"><stop offset="0%" stopColor="#bd1df7" /><stop offset="100%" stopColor="#f10e18" /></linearGradient>
-      <linearGradient id="g4" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(90 0.5 0.5)"><stop offset="0%" stopColor="#e81bf5" /><stop offset="100%" stopColor="#e4103e" /></linearGradient>
-      <linearGradient id="g5" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(90 0.5 0.5)"><stop offset="0%" stopColor="#f419d3" /><stop offset="100%" stopColor="#d7135f" /></linearGradient>
-      <linearGradient id="g6" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(90 0.5 0.5)"><stop offset="0%" stopColor="#f217a4" /><stop offset="100%" stopColor="#ca147b" /></linearGradient>
-      <linearGradient id="g7" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(90 0.5 0.5)"><stop offset="0%" stopColor="#f11575" /><stop offset="100%" stopColor="#be1692" /></linearGradient>
-      <linearGradient id="g8" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(90 0.5 0.5)"><stop offset="0%" stopColor="#ef1346" /><stop offset="100%" stopColor="#b217a4" /></linearGradient>
-      <linearGradient id="g9" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(90 0.5 0.5)"><stop offset="0%" stopColor="#ec1217" /><stop offset="100%" stopColor="#9919a6" /></linearGradient>
-      <linearGradient id="g10" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(90 0.5 0.5)"><stop offset="0%" stopColor="#e83913" /><stop offset="100%" stopColor="#79199a" /></linearGradient>
-      <linearGradient id="g11" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(90 0.5 0.5)"><stop offset="0%" stopColor="#e36414" /><stop offset="100%" stopColor="#5c1a8f" /></linearGradient>
-      <linearGradient id="g12" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(118 0.5 0.5)"><stop offset="0%" stopColor="#9a031e" /><stop offset="100%" stopColor="#ced51c" /></linearGradient>
-      <linearGradient id="g23" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0" gradientTransform="rotate(126 0.5 0.5)"><stop offset="0%" stopColor="#1b998b" /><stop offset="100%" stopColor="#b11b79" /></linearGradient>
-      <filter id="ditherN" x="0" y="0" width="100%" height="100%">
-        <feTurbulence type="fractalNoise" baseFrequency="2.95" numOctaves="5" seed="9" stitchTiles="stitch" />
-      </filter>
-      <mask id="ditherMask" maskUnits="userSpaceOnUse" x="0" y="0" width="1200" height="675" style={{ maskType: 'alpha' }}>
-        <use href="#allPills" />
-      </mask>
-    </defs>
-    <g id="allPills">
-      {[354, 423, 494, 564, 634, 704, 774, 844].map((cx, col) => {
-        const gMap = [
-          [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-          [12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 23],
-          [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
-          [23, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 23],
-          [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-          [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-          [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
-          [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-        ];
-        const startY = [154, 161, 101, 112, 138, 182, 151, 123];
-        return gMap[col].map((gi, ri) => (
-          <rect key={`${col}-${ri}`}
-            transform={`translate(${cx} ${startY[col] + ri * 34.5})`}
-            x="-35" y="-85" width="70" height="170" rx="35" ry="35"
-            fill={`url(#g${gi})`}
-          />
-        ));
-      })}
-    </g>
-    <rect width="1200" height="675" filter="url(#ditherN)" mask="url(#ditherMask)" opacity="0.86" style={{ mixBlendMode: 'overlay' }} />
-  </svg>
-);
+/* ── Theme Toggle Component ── */
+function ThemeToggle() {
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('leappbee-theme') || 'light';
+    }
+    return 'light';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('leappbee-theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
+
+  return (
+    <button
+      className="theme-toggle"
+      onClick={toggleTheme}
+      aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+      title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+    >
+      {theme === 'dark' ? (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="5" />
+          <line x1="12" y1="1" x2="12" y2="3" />
+          <line x1="12" y1="21" x2="12" y2="23" />
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+          <line x1="1" y1="12" x2="3" y2="12" />
+          <line x1="21" y1="12" x2="23" y2="12" />
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+        </svg>
+      ) : (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      )}
+    </button>
+  );
+}
+
 
 /* ── Paperclip paperclip icon ─────────────────────────────── */
 const LeappbeeLogo = ({ size = 20 }) => (
@@ -69,6 +64,9 @@ export default function LandingPage() {
   const { videos = [], brand, process: proc, stats, faq, footer, hero, contact, testimonials } = data;
 
   useEffect(() => {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    const calTheme = currentTheme === 'dark' ? 'dark' : 'light';
+
     (function (C, A, L) {
       let p = function (a, ar) { a.q.push(ar); };
       let d = C.document;
@@ -100,12 +98,45 @@ export default function LandingPage() {
 
     window.Cal.ns["leappbee-discovery-call"]("inline", {
       elementOrSelector: "#my-cal-inline-leappbee-discovery-call",
-      config: { "layout": "month_view", "useSlotsViewOnSmallScreen": "true" },
+      config: { "layout": "month_view", "useSlotsViewOnSmallScreen": "true", "theme": calTheme },
       calLink: "leappbee/leappbee-discovery-call",
     });
 
-    window.Cal.ns["leappbee-discovery-call"]("ui", { "hideEventTypeDetails": false, "layout": "month_view" });
+    window.Cal.ns["leappbee-discovery-call"]("ui", {
+      "hideEventTypeDetails": false,
+      "layout": "month_view",
+      "theme": calTheme,
+    });
   }, [contact.calcom_link]);
+
+  // Sync Cal.com theme when data-theme attribute changes
+  useEffect(() => {
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.attributeName === 'data-theme') {
+          const newTheme = document.documentElement.getAttribute('data-theme') || 'light';
+          const calTheme = newTheme === 'dark' ? 'dark' : 'light';
+          if (window.Cal && window.Cal.ns && window.Cal.ns["leappbee-discovery-call"]) {
+            window.Cal.ns["leappbee-discovery-call"]("ui", {
+              "theme": calTheme,
+            });
+          }
+          // Also update the iframe directly for immediate visual feedback
+          const calContainer = document.getElementById('my-cal-inline-leappbee-discovery-call');
+          if (calContainer) {
+            const iframe = calContainer.querySelector('iframe');
+            if (iframe && iframe.src) {
+              const url = new URL(iframe.src);
+              url.searchParams.set('theme', calTheme);
+              iframe.src = url.toString();
+            }
+          }
+        }
+      }
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    return () => observer.disconnect();
+  }, []);
 
   const longVideos = videos.filter(v => v.type === 'long-form');
   const shortVideos = videos.filter(v => v.type === 'short-form');
@@ -164,28 +195,63 @@ export default function LandingPage() {
       {/* ══ HERO ══ */}
       <header className="hero" id="home">
         <div className="hero-bg">
-          <HeroBgSVG />
+          <HeroBgDynamic />
           <div className="hero-grid-overlay" />
           <div className="hero-spotlight" />
           <div className="hero-orb hero-orb-1" />
           <div className="hero-orb hero-orb-2" />
           <div style={{
             position: 'absolute', bottom: 0, left: 0, right: 0, height: '60%',
-            background: 'linear-gradient(to top, #141312 12%, transparent)', pointerEvents: 'none', zIndex: 5
+            background: 'linear-gradient(to top, var(--hero-fade) 12%, transparent)', pointerEvents: 'none', zIndex: 5
           }} />
         </div>
         <div className="hero-body">
           <span className="hero-eyebrow">{brand.emoji} {hero.eyebrow}</span>
           <h1 className="hero-title">
             {hero.title.split('\n').map((line, i) => (
-              <React.Fragment key={i}>{line}{i < hero.title.split('\n').length - 1 && <br />}</React.Fragment>
+              <React.Fragment key={i}>
+                {line}
+                {i < hero.title.split('\n').length - 1 && <br />}
+              </React.Fragment>
             ))}
+            {' '}
+            {hero.rotating_words && (
+              <WordRotator words={hero.rotating_words} />
+            )}
           </h1>
           <p className="hero-sub">{hero.subtitle}</p>
           <div className="hero-ctas">
             <a href={hero.cta_primary.href} className="btn-primary">{hero.cta_primary.label}</a>
             <a href={hero.cta_secondary.href} className="btn-secondary">{hero.cta_secondary.label}</a>
           </div>
+          <div className="hero-proof-row">
+            <div className="proof-item">
+              <span className="proof-icon">⚡</span>
+              <span>High-Retention Hooks</span>
+            </div>
+            <div className="proof-item">
+              <span className="proof-icon">🏆</span>
+              <span>Elite Editing Squad</span>
+            </div>
+            <div className="proof-item">
+              <span className="proof-icon">📈</span>
+              <span>300% Avg. Growth</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Floating Badges */}
+        <div className="floating-badge badge-1">
+          <span className="badge-icon">⚡</span>
+          <span className="badge-text">High-Retention Hooks</span>
+        </div>
+        <div className="floating-badge badge-2">
+          <span className="badge-icon">🏆</span>
+          <span className="badge-text">Elite Editing Squad</span>
+        </div>
+        <div className="floating-badge badge-3">
+          <span className="badge-icon">📈</span>
+          <span className="badge-text">300% Avg. Growth</span>
         </div>
       </header>
 
@@ -272,7 +338,7 @@ export default function LandingPage() {
       </section>
 
       {/* ══ STATS ══ */}
-      <section id="impact" className="stats-border">
+      <section id="impact" className="stats-section">
         <div className="section-inner">
           <div className="wrap">
             <h2 className="stats-heading">
@@ -282,13 +348,23 @@ export default function LandingPage() {
                   : <React.Fragment key={i}>{i > 0 ? ' ' : ''}{word}</React.Fragment>
               )}
             </h2>
+            <p className="stats-sub">Real results from real creators who trust LeappBee with their content.</p>
             <div className="stats-row">
-              {stats.items.map(s => (
-                <div key={s.number}>
-                  <span className="stat-num"><AnimatedNumber value={s.number} /></span>
-                  <p className="stat-lbl">{s.label}</p>
-                </div>
-              ))}
+              {stats.items.map((s, i) => {
+                const icons = [
+                  <svg key="i" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>,
+                  <svg key="v" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="23 7 16 12 23 17 23 7" /><rect x="1" y="5" width="15" height="14" rx="2" ry="2" /></svg>,
+                  <svg key="t" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" /></svg>,
+                  <svg key="h" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
+                ];
+                return (
+                  <div className="stat-card" key={s.number}>
+                    <div className="stat-icon">{icons[i]}</div>
+                    <span className="stat-num"><AnimatedNumber value={s.number} /></span>
+                    <p className="stat-lbl">{s.label}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -297,17 +373,31 @@ export default function LandingPage() {
       {/* ══ TESTIMONIALS ══ */}
       <section id="testimonials" style={{ overflow: 'hidden' }}>
         <div className="section-inner">
-          <div className="wrap center" style={{ marginBottom: 48 }}>
-            <h2 className="section-h">What Creators Say</h2>
+          <div className="testi-section-header">
+            <span className="testi-badge">
+              <span className="testi-badge-dot" />
+              Testimonials
+            </span>
+            <h2 className="testi-section-title">What Creators Say</h2>
+            <p className="testi-section-sub">Don't just take our word for it. Here's what our clients have to say about working with LeappBee.</p>
           </div>
           <div className="testimonials-grid">
-            {testimonials.row1.map((t, i) => (
+            {[...testimonials.row1, ...(testimonials.row2 || [])].slice(0, 6).map((t, i) => (
               <div className="testi-card" key={`testi-${i}`}>
-                <img src={t.avatar} alt={t.name} className="testi-avatar" />
-                <div className="testi-stars">⭐⭐⭐⭐⭐</div>
-                <p className="testi-quote">"{t.quote}"</p>
-                <div className="testi-name">{t.name}</div>
-                <div className="testi-handle">{t.handle}</div>
+                <div className="testi-quote-mark">“</div>
+                <div className="testi-stars">
+                  {[...Array(5)].map((_, si) => (
+                    <span className="testi-star" key={si}>★</span>
+                  ))}
+                </div>
+                <p className="testi-quote">{t.quote}</p>
+                <div className="testi-author">
+                  <img src={t.avatar} alt={t.name} className="testi-avatar" />
+                  <div className="testi-author-info">
+                    <div className="testi-name">{t.name}</div>
+                    <div className="testi-handle">{t.handle}</div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -429,7 +519,7 @@ export default function LandingPage() {
                 <div className="footer-col-links">
                   {col.links.map((lnk, j) => (
                     col.title === 'Services' ? (
-                      <span key={j} style={{ fontSize: '13px', color: 'rgba(244,231,193,.65)' }}>
+                      <span key={j} style={{ fontSize: '13px', color: 'var(--taupe)' }}>
                         {lnk.label}
                       </span>
                     ) : (
@@ -444,6 +534,9 @@ export default function LandingPage() {
       </footer>
 
       {/* MODAL REMOVED */}
+
+      {/* ══ THEME TOGGLE ══ */}
+      <ThemeToggle />
     </>
   );
 }
@@ -506,3 +599,81 @@ function VCard({ v, short = false }) {
     </div>
   );
 }
+
+/* ─── Premium Background & Rotator Components ────────────────── */
+
+function HeroBgDynamic() {
+  const columnsCount = 24;
+  const pillsPerColumn = 10;
+
+  const gradients = [
+    'linear-gradient(180deg, #d97706 0%, #f59e0b 100%)',
+    'linear-gradient(180deg, #ea580c 0%, #fb923c 100%)',
+    'linear-gradient(180deg, #dc2626 0%, #fca5a5 100%)',
+    'linear-gradient(180deg, #b45309 0%, #f59e0b 100%)',
+    'linear-gradient(180deg, #c2410c 0%, #fdba74 100%)',
+    'linear-gradient(180deg, #b91c1c 0%, #fca5a5 100%)',
+    'linear-gradient(180deg, #d97706 0%, #fef08a 100%)',
+    'linear-gradient(180deg, #ea580c 0%, #ffedd5 100%)',
+    'linear-gradient(180deg, #854d0e 0%, #fef08a 100%)',
+    'linear-gradient(180deg, #c2410c 0%, #ffedd5 100%)',
+    'linear-gradient(180deg, #9a3412 0%, #fdba74 100%)',
+    'linear-gradient(180deg, #78350f 0%, #f59e0b 100%)',
+  ];
+
+  return (
+    <div className="hero-bg-dynamic">
+      {Array.from({ length: columnsCount }).map((_, colIdx) => {
+        const offset = (colIdx % 4) * 30;
+        return (
+          <div
+            key={colIdx}
+            className="hero-bg-col"
+            style={{
+              transform: `translateY(${offset}px)`,
+              animation: `floatCol ${15 + (colIdx % 3) * 5}s infinite alternate ease-in-out`,
+              animationDelay: `${colIdx * -0.4}s`
+            }}
+          >
+            {Array.from({ length: pillsPerColumn }).map((_, pillIdx) => {
+              const gradientIdx = (colIdx * 3 + pillIdx) % gradients.length;
+              return (
+                <div
+                  key={pillIdx}
+                  className="hero-bg-pill"
+                  style={{
+                    background: gradients[gradientIdx]
+                  }}
+                />
+              );
+            })}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function WordRotator({ words, interval = 2500 }) {
+  const [index, setIndex] = useState(0);
+  const [animClass, setAnimClass] = useState('word-slide-in');
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setAnimClass('word-slide-out');
+      setTimeout(() => {
+        setIndex((prev) => (prev + 1) % words.length);
+        setAnimClass('word-slide-in');
+      }, 300);
+    }, interval);
+
+    return () => clearInterval(timer);
+  }, [words, interval]);
+
+  return (
+    <span className={`word-rotator-text ${animClass}`}>
+      {words[index]}
+    </span>
+  );
+}
+
