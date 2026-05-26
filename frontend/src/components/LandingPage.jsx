@@ -196,7 +196,6 @@ export default function LandingPage() {
       <header className="hero" id="home">
         <div className="hero-bg">
           <HeroBgDynamic />
-          <div className="hero-grid-overlay" />
           <div className="hero-spotlight" />
           <div className="hero-orb hero-orb-1" />
           <div className="hero-orb hero-orb-2" />
