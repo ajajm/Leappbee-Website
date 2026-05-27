@@ -421,8 +421,6 @@ export default function LandingPage() {
             <span className="hero-trust-item">Cancel anytime</span>
           </div>
         </div>
-
-        <MarqueeTicker items={stats.items} />
       </header>
 
       <hr className="hr-fade" />
