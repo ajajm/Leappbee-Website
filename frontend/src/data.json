@@ -14,7 +14,7 @@
       "href": "https://cal.com/leappbee/leappbee-discovery-call?overlayCalendar=true"
     },
     "cta_secondary": {
-      "label": "See our work →",
+      "label": "See our work",
       "href": "#work"
     }
   },
@@ -25,8 +25,8 @@
     "steps": [
       {
         "num": "01",
-        "title": "Strategy-First",
-        "desc": "We audit your channel and engineer data-backed hooks to maximize watch time."
+        "title": "Strategy First",
+        "desc": "We audit your channel and engineer data backed hooks to maximize watch time."
       },
       {
         "num": "02",
@@ -73,13 +73,13 @@
       {
         "name": "American CE",
         "handle": "@americance",
-        "quote": "A complete game-changer for our content pipeline. Retention exploded after week one. Fast communication, faster delivery.",
+        "quote": "A complete game changer for our content pipeline. Retention exploded after week one. Fast communication, faster delivery.",
         "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80"
       },
       {
         "name": "John Holloway",
         "handle": "@johnholloway",
-        "quote": "Great for orchestrating video assets across formats. Pacing, graphics, SFX — everything dialled in to match our brand.",
+        "quote": "Great for orchestrating video assets across formats. Pacing, graphics, SFX, everything dialled in to match our brand.",
         "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&q=80"
       },
       {
@@ -105,7 +105,7 @@
       {
         "name": "John",
         "handle": "@john_creates",
-        "quote": "Framing, SFX, colour-grading — they make simple talking heads look like high-budget productions. Retention up 45%.",
+        "quote": "Framing, SFX, colour grading, they make simple talking heads look like high budget productions. Retention up 45%.",
         "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=80&q=80"
       },
       {
@@ -117,7 +117,7 @@
       {
         "name": "Yash S",
         "handle": "@yashms1",
-        "quote": "They understand YouTube hooks and watch-time optimisation at a deep level. Our CTR is up 70% in just 2 months.",
+        "quote": "They understand YouTube hooks and watch time optimisation at a deep level. Our CTR is up 70% in just 2 months.",
         "avatar": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=80&q=80"
       }
     ]
@@ -125,7 +125,7 @@
   "contact": {
     "label": "Get in touch",
     "heading": "Let's Work Together",
-    "subtext": "Choose your channel — we respond within the hour.",
+    "subtext": "Choose your channel, we respond within the hour.",
     "discord": {
       "name": "Chat on Discord",
       "desc": "Real-time responses for quick questions and instant quotes.",
@@ -143,7 +143,7 @@
     "items": [
       {
         "q": "How is LeappBee different from hiring a full-time editor?",
-        "a": "LeappBee gives you instant access to a full post-production team — editors, strategists, motion designers — without the overhead of salaries or onboarding time."
+        "a": "LeappBee gives you instant access to a full post production team, editors, strategists, motion designers, without the overhead of salaries or onboarding time."
       },
       {
         "q": "Can I keep using my existing project tools?",
@@ -151,7 +151,7 @@
       },
       {
         "q": "What happens when a project hits its revision limit?",
-        "a": "We build revision rounds into every project upfront. Further revisions are quoted and approved before any additional work begins — no surprises."
+        "a": "We build revision rounds into every project upfront. Further revisions are quoted and approved before any additional work begins, no surprises."
       },
       {
         "q": "How do I track what is in production?",
@@ -159,7 +159,7 @@
       },
       {
         "q": "Do you work continuously or in batches?",
-        "a": "Both. Rolling weekly batches or sprint-style runs around launches — whatever suits your calendar and release cadence."
+        "a": "Both. Rolling weekly batches or sprint style runs around launches, whatever suits your calendar and release cadence."
       },
       {
         "q": "Why LeappBee instead of a freelancer marketplace?",
@@ -167,11 +167,11 @@
       },
       {
         "q": "What does a typical retainer look like?",
-        "a": "Most clients start on a monthly plan covering 8–20 long-form or 30–60 short-form videos, with unlimited minor revisions included."
+        "a": "Most clients start on a monthly plan covering 8–20 long form or 30–60 short form videos, with unlimited minor revisions included."
       },
       {
-        "q": "Do you accept one-off projects?",
-        "a": "Yes. We take one-off launches, trailer cuts, and ad campaigns alongside retainer clients. Availability may vary — book a call to confirm."
+        "q": "Do you accept one off projects?",
+        "a": "Yes. We take one off launches, trailer cuts, and ad campaigns alongside retainer clients. Availability may vary, book a call to confirm."
       }
     ]
   },
@@ -201,11 +201,11 @@
         "title": "Services",
         "links": [
           {
-            "label": "Long-Form Editing",
+            "label": "Long Form Editing",
             "href": "#work"
           },
           {
-            "label": "Short-Form Clips",
+            "label": "Short Form Clips",
             "href": "#work"
           },
           {
