@@ -453,7 +453,6 @@ export default function LandingPage() {
                   <span className="process-num">{step.num}</span>
                   <h3 className="process-title">{step.title}</h3>
                   <p className="process-desc">{step.desc}</p>
-                  <span className="process-step-bg-num">{step.num}</span>
                 </motion.div>
               ))}
             </motion.div>
