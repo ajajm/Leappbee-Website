@@ -296,11 +296,18 @@
     },
     {
       "_id": "12",
-      "title": "ofm ai sample edit",
+      "title": "AI OFM Content Creation Workflows and Guides in 2026",
       "type": "long-form",
       "category": "Explainers",
-      "url": "https://youtu.be/FCbtwTaYmN0"
+      "url": "https://youtu.be/8YIHlLn08HA?si=uOhtcoUCTdGiB95S"
     },
+    {
+       "_id": "13",
+      "title": "The Ultimate Open Source Motion Control Workflow (No Kling Censorship) - Comfyui and Runpod",
+      "type": "long-form",
+      "category": "Explainers",
+      "url": "https://youtu.be/7Ke1CtuUCok?si=oWLOheVfZrdJ8Mkl"
+    }
     {
       "_id": "7",
       "title": "short videos",
