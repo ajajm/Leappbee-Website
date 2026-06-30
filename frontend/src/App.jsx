@@ -1,43 +1,51 @@
 import React, { useEffect } from 'react';
-import Lenis from 'lenis';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import LandingPage from './components/LandingPage';
+import ServicesPage from './components/ServicesPage';
 
-function App() {
+// Helper component to scroll to top or hash elements on route change
+function ScrollToTop() {
+  const { pathname, hash } = useLocation();
+
   useEffect(() => {
-    // Initialize theme from localStorage
-    const savedTheme = localStorage.getItem('leappbee-theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
-      infinite: false,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
+    if (!hash) {
+      window.scrollTo(0, 0);
+    } else {
+      // If there's a hash, let the browser scroll to the element smoothly
+      setTimeout(() => {
+        const targetElement = document.querySelector(hash);
+        if (targetElement) {
+          const targetY = targetElement.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({
+            top: targetY,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
     }
+  }, [pathname, hash]);
 
-    requestAnimationFrame(raf);
+  return null;
+}
 
-    // Smooth scroll to anchor links using Lenis
+function AppContent() {
+  useEffect(() => {
+    // Initialize theme strictly to dark
+    document.documentElement.setAttribute('data-theme', 'dark');
+
+    // Smooth scroll to anchor links using native window scrolling
     const handleAnchorClick = (e) => {
       const link = e.target.closest('a');
       if (link && link.hash && link.origin === window.location.origin) {
         const targetElement = document.querySelector(link.hash);
         if (targetElement) {
           e.preventDefault();
-          lenis.scrollTo(targetElement, {
-            offset: -64, // offset for sticky navbar height (64px)
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+          const targetY = targetElement.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({
+            top: targetY,
+            behavior: 'smooth'
           });
         }
       }
@@ -47,14 +55,27 @@ function App() {
 
     return () => {
       window.removeEventListener('click', handleAnchorClick);
-      lenis.destroy();
     };
   }, []);
 
   return (
     <>
-      <LandingPage />
+      <ScrollToTop />
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/services" element={<ServicesPage />} />
+      </Routes>
+      <Footer />
     </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 }
 
