@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import gsap from 'gsap';
 import data from '../data.json';
 
 const LeappbeeLogo = ({ size = 20 }) => (
@@ -13,41 +12,40 @@ const LeappbeeLogo = ({ size = 20 }) => (
 
 export default function Navbar() {
   const [navScrolled, setNavScrolled] = useState(false);
+  const [navHidden, setNavHidden] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { brand, hero } = data;
   const lastScrollY = useRef(0);
+  const ticking = useRef(false);
 
   useEffect(() => {
-    const onScroll = () => {
+    const SCROLL_DELTA = 8; // minimum scroll distance before toggling
+
+    const updateNav = () => {
       const currentScrollY = window.scrollY;
+      const delta = currentScrollY - lastScrollY.current;
+
       setNavScrolled(currentScrollY > 10);
 
       if (currentScrollY <= 20) {
-        gsap.to('.navbar-wrapper', {
-          yPercent: 0,
-          duration: 0.35,
-          ease: 'power2.out',
-          overwrite: 'auto'
-        });
-      } else if (currentScrollY > lastScrollY.current && currentScrollY > 80) {
-        // Scrolling down -> hide navbar
-        gsap.to('.navbar-wrapper', {
-          yPercent: -130,
-          duration: 0.35,
-          ease: 'power2.out',
-          overwrite: 'auto'
-        });
-      } else if (currentScrollY < lastScrollY.current) {
-        // Scrolling up -> show navbar
-        gsap.to('.navbar-wrapper', {
-          yPercent: 0,
-          duration: 0.35,
-          ease: 'power2.out',
-          overwrite: 'auto'
-        });
+        setNavHidden(false);
+      } else if (delta > SCROLL_DELTA && currentScrollY > 80) {
+        // Scrolling down past threshold -> hide
+        setNavHidden(true);
+      } else if (delta < -SCROLL_DELTA) {
+        // Scrolling up past threshold -> show
+        setNavHidden(false);
       }
 
       lastScrollY.current = currentScrollY;
+      ticking.current = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking.current) {
+        requestAnimationFrame(updateNav);
+        ticking.current = true;
+      }
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -56,7 +54,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="navbar-wrapper">
+      <div className={`navbar-wrapper${navHidden ? ' nav-hidden' : ''}`}>
         <nav className={`navbar-pill${navScrolled ? ' scrolled' : ''}`}>
           <div className="nav-pill-left">
             <Link to="/services" className="nav-link">Services</Link>

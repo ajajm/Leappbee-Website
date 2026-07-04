@@ -1,7 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useInView, useScroll, useSpring } from 'framer-motion';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollTrigger);
 import { parseVideoUrl } from '../utils/videoParser';
 import data from '../data.json';
+import { FluidMorphBg } from './FluidMorphBg';
+import { motion, useInView, useScroll, useSpring } from 'framer-motion';
 
 /* ══════════════════════════════════════════════════════════
    ANIMATION PRIMITIVES
@@ -187,6 +193,115 @@ function VCard({ v, short = false }) {
 
 
 /* ══════════════════════════════════════════════════════════
+   INTERACTIVE HERO BACKGROUND
+   ══════════════════════════════════════════════════════════ */
+
+function InteractiveHeroBg() {
+  return (
+    <div className="hero-interactive-bg">
+      <div className="fluid-morph-bg-container">
+        <FluidMorphBg />
+      </div>
+
+
+
+      {/* Subtle grid pattern */}
+      <div className="hero-grid-pattern" />
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════
+   ORBITING CIRCLES — Creative Agency Icons
+   ══════════════════════════════════════════════════════════ */
+
+function OrbitingCircles() {
+  return (
+    <div className="orbit-wrapper">
+      {/* Center icon — LeappBee logo */}
+      <div className="orbit-center">
+        <img src="/leapbee_logo.jpg" alt="LeappBee" className="orbit-center-logo" />
+      </div>
+
+      {/* Outer orbit — 5 icons */}
+      <div className="orbit-ring orbit-ring-outer">
+        <div className="orbit-icon" style={{ '--i': 0, '--total': 5 }}>
+          {/* YouTube */}
+          <svg viewBox="0 0 24 24" fill="#FF0000" width="24" height="24">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+          </svg>
+        </div>
+        <div className="orbit-icon" style={{ '--i': 1, '--total': 5 }}>
+          {/* Instagram */}
+          <svg viewBox="0 0 24 24" width="24" height="24">
+            <defs><linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stopColor="#feda75" /><stop offset="25%" stopColor="#fa7e1e" /><stop offset="50%" stopColor="#d62976" /><stop offset="75%" stopColor="#962fbf" /><stop offset="100%" stopColor="#4f5bd5" /></linearGradient></defs>
+            <path fill="url(#ig)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+          </svg>
+        </div>
+        <div className="orbit-icon" style={{ '--i': 2, '--total': 5 }}>
+          {/* TikTok */}
+          <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.75a8.18 8.18 0 0 0 4.78 1.54V6.84a4.83 4.83 0 0 1-1.02-.15z" />
+          </svg>
+        </div>
+        <div className="orbit-icon" style={{ '--i': 3, '--total': 5 }}>
+          {/* Premiere Pro */}
+          <svg viewBox="0 0 24 24" width="24" height="24">
+            <rect width="24" height="24" rx="4" fill="#9999FF" />
+            <text x="4" y="17" fill="#1a1a2e" fontFamily="Inter, sans-serif" fontSize="12" fontWeight="800">Pr</text>
+          </svg>
+        </div>
+        <div className="orbit-icon" style={{ '--i': 4, '--total': 5 }}>
+          {/* After Effects */}
+          <svg viewBox="0 0 24 24" width="24" height="24">
+            <rect width="24" height="24" rx="4" fill="#9999FF" />
+            <text x="3" y="17" fill="#1a1a2e" fontFamily="Inter, sans-serif" fontSize="12" fontWeight="800">Ae</text>
+          </svg>
+        </div>
+      </div>
+
+      {/* Inner orbit — 4 icons, reversed */}
+      <div className="orbit-ring orbit-ring-inner">
+        <div className="orbit-icon" style={{ '--i': 0, '--total': 4 }}>
+          {/* Figma */}
+          <svg viewBox="0 0 24 24" width="20" height="20">
+            <path fill="#0ACF83" d="M8 24c2.208 0 4-1.792 4-4v-4H8c-2.208 0-4 1.792-4 4s1.792 4 4 4z" />
+            <path fill="#A259FF" d="M4 12c0-2.208 1.792-4 4-4h4v8H8c-2.208 0-4-1.792-4-4z" />
+            <path fill="#F24E1E" d="M4 4c0-2.208 1.792-4 4-4h4v8H8C5.792 8 4 6.208 4 4z" />
+            <path fill="#FF7262" d="M12 0h4c2.208 0 4 1.792 4 4s-1.792 4-4 4h-4V0z" />
+            <path fill="#1ABCFE" d="M20 12c0 2.208-1.792 4-4 4s-4-1.792-4-4 1.792-4 4-4 4 1.792 4 4z" />
+          </svg>
+        </div>
+        <div className="orbit-icon" style={{ '--i': 1, '--total': 4 }}>
+          {/* Slack */}
+          <svg viewBox="0 0 24 24" width="20" height="20">
+            <path fill="#E01E5A" d="M5.042 15.166a2.528 2.528 0 0 1-2.52 2.521A2.528 2.528 0 0 1 0 15.166a2.528 2.528 0 0 1 2.522-2.521h2.52v2.521zm1.271 0a2.528 2.528 0 0 1 2.521-2.521 2.528 2.528 0 0 1 2.521 2.521v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.521v-6.313z" />
+            <path fill="#36C5F0" d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zm0 1.271a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312z" />
+            <path fill="#2EB67D" d="M18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zm-1.27 0a2.528 2.528 0 0 1-2.522 2.521 2.528 2.528 0 0 1-2.521-2.521V2.522A2.528 2.528 0 0 1 15.164 0a2.528 2.528 0 0 1 2.522 2.522v6.312z" />
+            <path fill="#ECB22E" d="M15.164 18.956a2.528 2.528 0 0 1 2.522 2.522A2.528 2.528 0 0 1 15.164 24a2.528 2.528 0 0 1-2.521-2.522v-2.522h2.521zm0-1.27a2.528 2.528 0 0 1-2.521-2.522 2.528 2.528 0 0 1 2.521-2.521h6.314A2.528 2.528 0 0 1 24 15.164a2.528 2.528 0 0 1-2.522 2.522h-6.314z" />
+          </svg>
+        </div>
+        <div className="orbit-icon" style={{ '--i': 2, '--total': 4 }}>
+          {/* Twitter / X */}
+          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </div>
+        <div className="orbit-icon" style={{ '--i': 3, '--total': 4 }}>
+          {/* DaVinci / Video icon */}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="20" height="20">
+            <polygon points="23 7 16 12 23 17 23 7" fill="var(--accent)" stroke="var(--accent)" />
+            <rect x="1" y="5" width="15" height="14" rx="2" stroke="var(--accent)" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+
+/* ══════════════════════════════════════════════════════════
    MAIN LANDING PAGE
    ══════════════════════════════════════════════════════════ */
 
@@ -261,9 +376,9 @@ export default function LandingPage() {
   const shownLong = longTab === 'All' ? longVideos : longVideos.filter(v => v.category === longTab);
   const shownShort = shortTab === 'All' ? shortVideos : shortVideos.filter(v => v.category === shortTab);
 
-  /* ── Testimonials for marquee ── */
-  const allTestimonials = [...testimonials.row1, ...(testimonials.row2 || [])];
-  const doubledTestimonials = [...allTestimonials, ...allTestimonials];
+  /* ── Testimonials for marquee (two rows, opposite directions) ── */
+  const testiRow1 = [...testimonials.row1, ...testimonials.row1];
+  const testiRow2 = [...(testimonials.row2 || []), ...(testimonials.row2 || [])];
 
   const statIcons = [
     <svg key="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>,
@@ -280,38 +395,41 @@ export default function LandingPage() {
           HERO — Left Aligned
           ══════════════════════════════════════════════════ */}
       <header className="hero" id="home">
-        <div className="hero-bg">
-          <div className="hero-mesh-1" />
-          <div className="hero-mesh-2" />
-        </div>
+        <InteractiveHeroBg />
 
-        <div className="hero-body">
-          <span className="hero-eyebrow">{hero.eyebrow}</span>
-          <h1 className="hero-title">
-            {hero.title.split('\n').map((line, i, arr) => (
-              <React.Fragment key={i}>
-                {line}
-                {i < arr.length - 1 && <br />}
-              </React.Fragment>
-            ))}{' '}
-            {hero.rotating_words && <WordRotator words={hero.rotating_words} />}
-          </h1>
-          <p className="hero-sub">{hero.subtitle}</p>
-          <div className="hero-ctas">
-            <a href={hero.cta_primary.href} className="btn-accent btn-lg btn-animated" target="_blank" rel="noreferrer">
-              <span className="btn-text-base">{hero.cta_primary.label}</span>
-              <span className="btn-text-hover">{hero.cta_primary.label}</span>
-            </a>
-            <a href={hero.cta_secondary.href} className="btn-secondary">{hero.cta_secondary.label}</a>
+        <div className="hero-content">
+          <div className="hero-body">
+            <span className="hero-eyebrow">{hero.eyebrow}</span>
+            <h1 className="hero-title">
+              {hero.title.split('\n').map((line, i, arr) => (
+                <React.Fragment key={i}>
+                  {line}
+                  {i < arr.length - 1 && <br />}
+                </React.Fragment>
+              ))}{' '}
+              {hero.rotating_words && <WordRotator words={hero.rotating_words} />}
+            </h1>
+            <p className="hero-sub">{hero.subtitle}</p>
+            <div className="hero-ctas">
+              <a href={hero.cta_primary.href} className="btn-accent btn-lg btn-animated" target="_blank" rel="noreferrer">
+                <span className="btn-text-base">{hero.cta_primary.label}</span>
+                <span className="btn-text-hover">{hero.cta_primary.label}</span>
+              </a>
+              <a href={hero.cta_secondary.href} className="btn-secondary">{hero.cta_secondary.label}</a>
+            </div>
+            <div className="hero-trust-row">
+              <span className="hero-trust-item">No contracts</span>
+              <span className="hero-trust-sep">•</span>
+              <span className="hero-trust-item">48h first draft</span>
+              <span className="hero-trust-sep">•</span>
+              <span className="hero-trust-item">Dedicated team</span>
+              <span className="hero-trust-sep">•</span>
+              <span className="hero-trust-item">Cancel anytime</span>
+            </div>
           </div>
-          <div className="hero-trust-row">
-            <span className="hero-trust-item">No contracts</span>
-            <span className="hero-trust-sep">•</span>
-            <span className="hero-trust-item">48h first draft</span>
-            <span className="hero-trust-sep">•</span>
-            <span className="hero-trust-item">Dedicated team</span>
-            <span className="hero-trust-sep">•</span>
-            <span className="hero-trust-item">Cancel anytime</span>
+
+          <div className="hero-orbit-col">
+            <OrbitingCircles />
           </div>
         </div>
       </header>
@@ -339,13 +457,32 @@ export default function LandingPage() {
               whileInView="visible"
               viewport={{ once: true, margin: '-80px' }}
             >
-              {proc.steps.map(step => (
-                <motion.div className="process-step" key={step.num} variants={staggerItem}>
-                  <span className="process-num">{step.num}</span>
-                  <h3 className="process-title">{step.title}</h3>
-                  <p className="process-desc">{step.desc}</p>
-                </motion.div>
-              ))}
+              {proc.steps.map((step, idx) => {
+                // High-end bullet items for each phase
+                const bullets = [
+                  ["Channel & content audit", "Data-backed hook engineering", "Watch-time optimization"],
+                  ["Dedicated lead editor", "Pro motion designer", "Growth & retention strategist"],
+                  ["One-click draft approval", "Guaranteed delivery windows", "Full commercial usage rights"]
+                ][idx] || [];
+
+                return (
+                  <motion.div className="process-card" key={step.num} variants={staggerItem}>
+                    <div className="process-card-glow" />
+                    <div className="process-card-grid" />
+                    <span className="process-large-num">{step.num}</span>
+                    <h3 className="process-card-title">{step.title}</h3>
+                    <p className="process-card-desc">{step.desc}</p>
+                    <div className="process-card-bullets">
+                      {bullets.map((bullet, bulletIdx) => (
+                        <div className="process-bullet-item" key={bulletIdx}>
+                          <span className="process-bullet-check" />
+                          <span>{bullet}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                );
+              })}
             </motion.div>
 
             <Reveal delay={0.15}>
@@ -367,7 +504,8 @@ export default function LandingPage() {
       {/* ══════════════════════════════════════════════════
           PORTFOLIO
           ══════════════════════════════════════════════════ */}
-      <section id="work">
+      <section id="work" className="work-section">
+        <div className="work-section-grid" />
         <div className="section-inner">
           <div className="wrap">
             {/* Long form */}
@@ -472,7 +610,7 @@ export default function LandingPage() {
       <hr className="hr-fade" />
 
       {/* ══════════════════════════════════════════════════
-          TESTIMONIALS — Marquee
+          TESTIMONIALS — Two-Row Marquee
           ══════════════════════════════════════════════════ */}
       <section id="testimonials">
         <div className="section-inner">
@@ -490,22 +628,46 @@ export default function LandingPage() {
             </Reveal>
           </div>
 
-          <div className="testimonials-marquee">
-            <div className="testimonials-track">
-              {doubledTestimonials.map((t, i) => (
-                <div className="testi-card" key={`testi-${i}`}>
-                  <div className="testi-quote-mark">&ldquo;</div>
-                  <p className="testi-quote">{t.quote}</p>
-                  <div className="testi-author">
-                    <img src={t.avatar} alt={t.name} className="testi-avatar" />
-                    <div className="testi-author-info">
-                      <div className="testi-name">{t.name}</div>
-                      <div className="testi-handle">{t.handle}</div>
+          <div className="marquee-container">
+            {/* Row 1 — scrolls left */}
+            <div className="marquee-row">
+              <div className="marquee-track">
+                {testiRow1.map((t, i) => (
+                  <figure className="testi-card" key={`r1-${i}`}>
+                    <div className="testi-card-header">
+                      <img src={t.avatar} alt={t.name} className="testi-avatar" />
+                      <div className="testi-author-info">
+                        <figcaption className="testi-name">{t.name}</figcaption>
+                        <p className="testi-handle">{t.handle}</p>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              ))}
+                    <blockquote className="testi-quote">{t.quote}</blockquote>
+                  </figure>
+                ))}
+              </div>
             </div>
+
+            {/* Row 2 — scrolls right (reverse) */}
+            <div className="marquee-row marquee-reverse">
+              <div className="marquee-track">
+                {testiRow2.map((t, i) => (
+                  <figure className="testi-card" key={`r2-${i}`}>
+                    <div className="testi-card-header">
+                      <img src={t.avatar} alt={t.name} className="testi-avatar" />
+                      <div className="testi-author-info">
+                        <figcaption className="testi-name">{t.name}</figcaption>
+                        <p className="testi-handle">{t.handle}</p>
+                      </div>
+                    </div>
+                    <blockquote className="testi-quote">{t.quote}</blockquote>
+                  </figure>
+                ))}
+              </div>
+            </div>
+
+            {/* Edge fade gradients */}
+            <div className="marquee-fade-left" />
+            <div className="marquee-fade-right" />
           </div>
         </div>
       </section>

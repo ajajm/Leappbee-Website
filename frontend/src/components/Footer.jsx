@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Particles } from './Particles';
 import data from '../data.json';
 
 const LeappbeeLogo = ({ size = 20 }) => (
@@ -15,6 +16,15 @@ export default function Footer() {
 
   return (
     <footer className="footer">
+      <Particles
+        className="footer-particles"
+        quantity={60}
+        size={0.3}
+        color="#ffffff"
+        staticity={80}
+        ease={80}
+        style={{ opacity: 0.9 }}
+      />
       <div className="wrap">
         <div className="footer-grid">
           <div>

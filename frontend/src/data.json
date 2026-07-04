@@ -6,8 +6,12 @@
   },
   "hero": {
     "eyebrow": "trust the process",
-    "title": "A team of experts for\nevery",
-    "rotating_words": ["creator.", "influencer.", "brand."],
+    "title": "A team of\nexperts for\nevery",
+    "rotating_words": [
+      "creator.",
+      "influencer.",
+      "brand."
+    ],
     "subtitle": "We handle the production,\nyou own the influence.",
     "cta_primary": {
       "label": "Get started",
@@ -296,13 +300,20 @@
     },
     {
       "_id": "12",
-      "title": "ofm ai sample edit",
+      "title": "AI OFM Content Creation Workflows and Guides in 2026",
       "type": "long-form",
       "category": "Explainers",
-      "url": "https://youtu.be/FCbtwTaYmN0"
+      "url": "https://youtu.be/8YIHlLn08HA?si=uOhtcoUCTdGiB95S"
     },
     {
-      "_id": "7",
+      "_id": "13",
+      "title": "The Ultimate Open Source Motion Control Workflow (No Kling Censorship) - Comfyui and Runpod",
+      "type": "long-form",
+      "category": "Explainers",
+      "url": "https://youtu.be/7Ke1CtuUCok?si=oWLOheVfZrdJ8Mkl"
+    },
+    {
+      "_id": "14",
       "title": "short videos",
       "type": "short-form",
       "category": "Shorts",
@@ -310,7 +321,7 @@
       "order": 0
     },
     {
-      "_id": "8",
+      "_id": "15",
       "title": "short videos",
       "type": "short-form",
       "category": "Shorts",
@@ -318,7 +329,7 @@
       "order": 1
     },
     {
-      "_id": "9",
+      "_id": "16",
       "title": "tejas_realestate",
       "type": "short-form",
       "category": "Shorts",
@@ -326,7 +337,7 @@
       "order": 2
     },
     {
-      "_id": "10",
+      "_id": "17",
       "title": "before-after",
       "type": "short-form",
       "category": "Shorts",
@@ -334,7 +345,7 @@
       "order": 3
     },
     {
-      "_id": "11",
+      "_id": "18",
       "title": "before-after",
       "type": "short-form",
       "category": "Shorts",
@@ -342,7 +353,7 @@
       "order": 3
     },
     {
-      "_id": "14",
+      "_id": "19",
       "title": "before-after",
       "type": "short-form",
       "category": "Shorts",
