@@ -579,6 +579,11 @@ export default function LandingPage() {
           STATS — Inline Band
           ══════════════════════════════════════════════════ */}
       <section id="impact" className="stats-section alt-bg">
+        {/* Background Overlays */}
+        <div className="stats-bg-grid" />
+        <div className="stats-bg-glow stats-bg-glow-1" />
+        <div className="stats-bg-glow stats-bg-glow-2" />
+
         <div className="section-inner">
           <div className="wrap">
             <Reveal>
@@ -617,7 +622,15 @@ export default function LandingPage() {
           <div className="wrap">
             <Reveal>
               <div className="testi-section-header">
-                <span className="testi-badge">Client Results</span>
+                <span style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  fontSize: '12px',
+                  fontWeight: 600,
+                  letterSpacing: '0.06em',
+                  textTransform: 'uppercase',
+                  color: 'var(--accent)'
+                }}>Client Results</span>
                 <h2 className="testi-section-title">
                   Real creators. <span className="accent-serif">Real growth.</span>
                 </h2>
@@ -754,7 +767,15 @@ export default function LandingPage() {
             <div className="faq-layout">
               <Reveal>
                 <div className="faq-intro">
-                  <span className="faq-label">FAQ</span>
+                  <span style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    fontSize: '12px',
+                    fontWeight: 600,
+                    letterSpacing: '0.06em',
+                    textTransform: 'uppercase',
+                    color: 'var(--accent)'
+                  }}>FAQ</span>
                   <h2 className="faq-heading">
                     Questions<br />
                     <span className="accent-serif">answered.</span>
